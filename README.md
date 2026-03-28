@@ -21,7 +21,8 @@ This project is a full-stack hotel ordering system where customers can browse a 
 - Spring Boot 3
 - Spring Web
 - Spring Data JPA
-- H2 Database
+- PostgreSQL
+- H2 Database for local fallback
 - Jakarta Validation
 
 ## Frontend Stack
@@ -77,7 +78,7 @@ mvn spring-boot:run
 
 Backend runs on `http://localhost:8080`
 
-H2 console:
+Optional H2 console for local fallback:
 
 - `http://localhost:8080/h2-console`
 - JDBC URL: `jdbc:h2:mem:hotel_management`
@@ -99,7 +100,7 @@ Frontend runs on `http://localhost:5173`
 This repository includes:
 
 - `Dockerfile` to build the React frontend and package the Spring Boot WAR
-- `render.yaml` to create a Render web service
+- `render.yaml` to create a Render web service and a free Render Postgres database
 
 Render deployment steps:
 
@@ -115,14 +116,17 @@ After deployment, Render will:
 - bundle the frontend into Spring Boot static files
 - package the backend as a WAR
 - run the WAR with `java -jar`
+- provision a Render Postgres database
+- inject the Postgres connection into Spring Boot automatically
 
 Important note:
 
-- The app currently uses in-memory H2, so order data resets whenever the Render service restarts or redeploys.
+- On Render, the app will use PostgreSQL for persistent data.
+- For local development, the app still falls back to in-memory H2 if no Postgres environment variables are provided.
 
 ## Notes
 
-- The backend currently uses an in-memory database, so orders reset when the server restarts.
+- Render deployment is now configured for PostgreSQL persistence.
 - The current project is a strong starter template for expanding into admin dashboards, payment flow, or kitchen order tracking.
 
 ## Current Environment Limitation

@@ -1,3 +1,9 @@
+databases:
+  - name: hotel-management-db
+    plan: free
+    databaseName: hotel_management
+    user: hotel_management_user
+
 services:
   - type: web
     name: hotel-management
@@ -6,3 +12,12 @@ services:
     dockerfilePath: ./Dockerfile
     autoDeploy: true
     healthCheckPath: /api/menu
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: hotel-management-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+        value: org.postgresql.Driver
+      - key: H2_CONSOLE_ENABLED
+        value: "false"
