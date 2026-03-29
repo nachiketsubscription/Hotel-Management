@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MenuCard from "./MenuCard";
-
-const API_BASE_URL = "http://localhost:8080/api";
+import { API_BASE_URL } from "../api";
 const FOOD_TYPE_OPTIONS = ["All", "Veg", "Non-Veg"];
 const NON_VEG_KEYWORDS = ["chicken", "mutton", "fish", "prawn", "egg"];
 

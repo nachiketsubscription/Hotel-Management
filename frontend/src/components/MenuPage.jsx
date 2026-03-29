@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import MenuCard from "./MenuCard";
-
-const API_BASE_URL = "http://localhost:8080/api";
+import { API_BASE_URL } from "../api";
 
 export default function MenuPage() {
   const [menu, setMenu] = useState([]);
